@@ -1,6 +1,7 @@
 site_name: Pypangraph Docs
 nav:
   - Home: index.md
+  - Installation: installation.md
   - Tutorial: 
     - tutorial1.md
     - tutorial2.md
