@@ -2,6 +2,9 @@
 # It contains utilities to reconstruct the sequences and their alignment
 
 from dataclasses import dataclass
+from Bio.Align import MultipleSeqAlignment
+from Bio.SeqRecord import SeqRecord
+from Bio.Seq import Seq
 
 
 @dataclass
@@ -98,6 +101,12 @@ class Alignment:
         """Returns the number of sequences in the block"""
         return len(self.edits)
 
+    def __str__(self):
+        return f"Alignment with {len(self)} sequences and consensus length {len(self.consensus)} bp"
+
+    def __repr__(self):
+        return f"Alignment with {len(self)} sequences and consensus length {len(self.consensus)} bp"
+
     def node_ids(self):
         """Returns the list of node ids"""
         return list(self.edits.keys())
@@ -117,3 +126,17 @@ class Alignment:
     def depth(self):
         """Returns the number of occurrences of the block"""
         return len(self.edits)
+
+    def to_biopython_alignment(self):
+        """Returns the alignment in biopython MultipleSeqAlignment format"""
+        records = []
+        for node_id, seq in self.generate_alignment().items():
+            records.append(SeqRecord(Seq(seq), id=str(node_id)))
+        return MultipleSeqAlignment(records)
+
+    def to_biopython_records(self):
+        """Returns the sequences in biopython SeqRecord format"""
+        records = []
+        for node_id, seq in self.generate_alignment().items():
+            records.append(SeqRecord(Seq(seq), id=str(node_id)))
+        return records

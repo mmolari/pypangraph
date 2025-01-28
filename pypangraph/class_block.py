@@ -26,7 +26,7 @@ class Block:
         return len(self.alignment.consensus)
 
     def __str__(self):
-        return f"block {self.id}, consensus len {len(self.sequence) / 1000} kbp, {self.depth()} occurrences."
+        return f"block {self.id}, consensus len = {len(self.alignment.consensus)} bp, n. nodes = {self.depth()}"
 
     def depth(self):
         """How many occurrences of the block are present"""

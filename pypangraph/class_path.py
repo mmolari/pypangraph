@@ -21,10 +21,10 @@ class Path:
         return len(self.block_ids)
 
     def __repr__(self):
-        return f"path {self.name}, n. nodes = {len(self.nodes)}"
+        return f"path object | name = {self.name}, n. nodes = {len(self.nodes)}, length = {self.nuc_len} bp"
 
     def __str__(self):
-        return f"path {self.name}, n. nodes = {len(self.nodes)}"
+        return f"path object | name = {self.name}, n. nodes = {len(self.nodes)}, length = {self.nuc_len} bp"
 
 
 class PathCollection(IndexedCollection):

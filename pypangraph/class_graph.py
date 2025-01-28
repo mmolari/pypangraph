@@ -1,6 +1,5 @@
 # Wrapper class to load a Pangraph object from a .json file.
 
-import numpy as np
 import json
 import jsonschema
 from Bio import SeqRecord, Seq, AlignIO
