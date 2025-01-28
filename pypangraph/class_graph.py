@@ -31,6 +31,12 @@ class Pangraph:
         self.blocks = BlockCollection(pan_json["blocks"])
         self.nodes = Nodes(pan_json["nodes"])
 
+    def __repr__(self):
+        return f"pangraph object with {len(self.strains())} paths, {len(self.blocks)} blocks and {len(self.nodes)} nodes"
+
+    def __str__(self):
+        return f"pangraph object with {len(self.strains())} paths, {len(self.blocks)} blocks and {len(self.nodes)} nodes"
+
     @staticmethod
     def from_json(filename):
         """Creates a Pangraph object by loading it from the .json file.

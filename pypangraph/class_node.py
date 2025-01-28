@@ -39,6 +39,15 @@ class Nodes:
             }
         ).T
 
+    def __repr__(self):
+        return self.df.__repr__()
+
+    def __getitem__(self, key):
+        return self.df.loc[key]
+
+    def __len__(self):
+        return len(self.df)
+
     def block_path_counts(self) -> pd.DataFrame:
         """Returns a dataframe with columsns=paths, index=blocks, values=counts"""
         return self.df.pivot_table(

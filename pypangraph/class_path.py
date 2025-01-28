@@ -20,8 +20,11 @@ class Path:
         """Returns the number of nodes in the path"""
         return len(self.block_ids)
 
+    def __repr__(self):
+        return f"path {self.name}, n. nodes = {len(self.nodes)}"
+
     def __str__(self):
-        return f"path {self.name}, n. blocks = {len(self.block_ids)}"
+        return f"path {self.name}, n. nodes = {len(self.nodes)}"
 
 
 class PathCollection(IndexedCollection):
