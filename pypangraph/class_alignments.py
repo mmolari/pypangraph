@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from Bio.Align import MultipleSeqAlignment
 from Bio.SeqRecord import SeqRecord
 from Bio.Seq import Seq
+import numpy as np
 
 
 @dataclass

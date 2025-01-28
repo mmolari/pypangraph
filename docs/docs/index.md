@@ -4,6 +4,12 @@ PyPangraph is a Python library for loading, exploring and analyzing _pangenome g
 
 More details on this data structure and the algorithms used to build it can be found in [PanGraph's documentation](https://github.com/neherlab/pangraph) and the [paper](index.md#pangraph-paper)
 
+This documentation contains a series of tutorials to showcase the main features of PyPangraph:
+
+- [Loading and exploring a pangenome graph](tutorial1.md)
+- [Exploring block alignments](tutorial2.md)
+- [TODO](tutorial3.md)
+- [TODO](tutorial4.md)
 
 ## What is a Pangenome Graph?
 
