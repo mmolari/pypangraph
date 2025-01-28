@@ -1,22 +1,29 @@
-# pypangraph - rust version
+# PyPangraph
 
-upgrade of the `pypangraph` library to parse
+PyPangraph is a python library to load, explore and analyze graphs produced by [Pangraph](https://github.com/neherlab/pangraph).
 
-## dev roadmap
+## installation
+
+PyPangraph can be installed via pip:
+```bash
+pip install pypangraph
+```
+
+## quick usage
+
+Loading a graph:
+```python
+import pypangraph as pp
+
+graph = pp.Pangraph.from_json("path/to/graph.json")
+```
+
+More examples can be found in the documentation.
+
+## development
 
 Install the package in dev mode:
 
 ```bash
 pip install -e .
 ```
-
-- [x] parse the graph
-  - [x] update alignment format
-- [x] produce block statistics
-- [x] produce alignments
-- [x] core-sinteny analysis
-- [ ] find core-junctions
-- [ ] run core-junction analysis
-  - [ ] rebuild sub-graphs
-  - [ ] analyze sub-graphs
-- [ ] locator: from position on the genome to position in the graph, and vice-versa.

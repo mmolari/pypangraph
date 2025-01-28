@@ -3,14 +3,14 @@ import pypangraph as pp
 
 
 def test_load_graph():
-    fname = "tests/data/plasmid_graph.json"
-    pp.Pangraph.load_json(fname)
+    fname = "tests/data/plasmids.json"
+    pp.Pangraph.from_json(fname)
 
 
 @pytest.fixture
 def graph():
-    fname = "tests/data/plasmid_graph.json"
-    pan = pp.Pangraph.load_json(fname)
+    fname = "tests/data/plasmids.json"
+    pan = pp.Pangraph.from_json(fname)
     return pan
 
 
@@ -40,4 +40,6 @@ def test_nodes_to_blocks(graph):
     assert len(B) == len(nodes)
     assert len(S) == len(nodes)
 
-    b, s = graph.nodes.node_to_block(nodes[0])
+    b, s = graph.nodes.node_to_block(8533989107945450583)
+    assert b == 14710008249239879492
+    assert s

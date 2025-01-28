@@ -32,11 +32,11 @@ class Pangraph:
         self.nodes = Nodes(pan_json["nodes"])
 
     @staticmethod
-    def load_json(filename):
+    def from_json(filename):
         """Creates a Pangraph object by loading it from the .json file.
 
         Args:
-            load_json (str): .json file to be loaded.
+            from_json (str): .json file to be loaded.
 
         Returns:
             Pangraph: the Pangraph object containing the results of the pipeline.
@@ -97,9 +97,9 @@ class Pangraph:
         # get order of core blocks in guide strain
         if guide_strain is None:
             guide_strain = self.strains()[0]
-        assert (
-            guide_strain in strains
-        ), f"Guide strain {guide_strain} not found in the dataset"
+        assert guide_strain in strains, (
+            f"Guide strain {guide_strain} not found in the dataset"
+        )
         guide_path = self.paths[guide_strain]
 
         # core block ids and strandedness
@@ -115,9 +115,9 @@ class Pangraph:
         for bid, guide_strand in core_blocks:
             # get block alignment
             aln_dict = self.blocks[bid].to_alignment()
-            assert len(aln_dict) == len(
-                strains
-            ), f"error: unexpected number of strains {bid}"
+            assert len(aln_dict) == len(strains), (
+                f"error: unexpected number of strains {bid}"
+            )
 
             # append alignment to the final alignment for each strain
             aln_strains = []
@@ -131,9 +131,9 @@ class Pangraph:
                 aln_strains.append(strain)
 
             # sanity check: core-blocks are present once per strain
-            assert (
-                set(strains) == set(aln_strains)
-            ), f"error: strain missing in block {bid}: {set(strains)} != {set(aln_strains)}"
+            assert set(strains) == set(aln_strains), (
+                f"error: strain missing in block {bid}: {set(strains)} != {set(aln_strains)}"
+            )
 
         # convert to biopython alignment
         records = []
