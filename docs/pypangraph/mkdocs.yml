@@ -1,0 +1,9 @@
+site_name: Pypangraph Docs
+nav:
+  - Home: index.md
+  - Tutorial: 
+    - tutorial1.md
+    - tutorial2.md
+    - tutorial3.md
+    - tutorial4.md
+theme: readthedocs
