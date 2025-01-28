@@ -43,3 +43,9 @@ def test_nodes_to_blocks(graph):
     b, s = graph.nodes.node_to_block(8533989107945450583)
     assert b == 14710008249239879492
     assert s
+
+
+def test_core_genome_alignment(graph):
+    core_aln = graph.core_genome_alignment()
+    assert len(core_aln) == 15
+    assert core_aln.get_alignment_length() == 64989
