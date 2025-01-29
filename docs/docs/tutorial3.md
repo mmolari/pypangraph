@@ -147,7 +147,17 @@ sns.clustermap(div)
 
 ![pairwise divergence](./assets/divergence_matrix.png)
 
+
 ## core genome tree
 
-!!! warning
-    TODO
+An alternative way of visualizing the divergence between plasmids and their relationships is to build a phylogenetic tree. This can easily be done from the core-genome alignment with different tree builders. For instance using [FastTree](http://www.microbesonline.org/fasttree/):
+
+```bash
+fasttree -nt -gtr core_aln.fa > core_tree.nwk
+```
+
+The resulting tree file can be visualized with interactive online viewers such as [auspice](https://auspice.us/):
+
+![core tree](./assets/core_tree.png)
+
+and it reflects the relationships that we observed in the divergence matrix.
