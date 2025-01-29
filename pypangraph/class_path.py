@@ -18,7 +18,7 @@ class Path:
 
     def __len__(self):
         """Returns the number of nodes in the path"""
-        return len(self.block_ids)
+        return len(self.nodes)
 
     def __repr__(self):
         return f"path object | name = {self.name}, n. nodes = {len(self.nodes)}, length = {self.nuc_len} bp"
