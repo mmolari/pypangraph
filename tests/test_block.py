@@ -56,9 +56,12 @@ def test_block_biopython_alignment(block):
     aln = block.to_biopython_alignment()
     assert len(aln) == 3
     assert aln.get_alignment_length() == 20
-    assert aln.alignment[0] == "AGTCTACC---TACTGGCAC"
-    assert aln.alignment[1] == "ACTCTACCCGCTACTAGCAC"
-    assert aln.alignment[2] == "ACTCTACCCG--ACTGGCAC"
+    assert aln[0].seq == "AGTCTACC---TACTGGCAC"
+    assert aln[0].id == "1"
+    assert aln[1].seq == "ACTCTACCCGCTACTAGCAC"
+    assert aln[1].id == "2"
+    assert aln[2].seq == "ACTCTACCCG--ACTGGCAC"
+    assert aln[2].id == "3"
 
 
 def test_block_biopython_records(block):
