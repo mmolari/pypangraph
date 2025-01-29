@@ -2,6 +2,8 @@
 
 import json
 import jsonschema
+import itertools
+import pandas as pd
 from Bio import SeqRecord, Seq, AlignIO
 
 from collections import defaultdict
@@ -88,6 +90,41 @@ class Pangraph:
         df = self.nodes.to_blockstats_df()
         df["len"] = [len(self.blocks[bid]) for bid in df.index]
         return df
+
+    def pairwise_accessory_genome_comparison(self):
+        """Returns a dataframe whose index are pairs of strains, and values are
+        - amount of shared pangenome in basepairs
+        - amount of private pangenome in basepairs
+        """
+        block_PA = self.to_blockcount_df() > 0
+        bl_order = block_PA.index
+        block_Ls = self.to_blockstats_df().loc[bl_order, "len"]
+        genomes = block_PA.columns
+
+        res_df = []
+        for i, j in itertools.combinations_with_replacement(genomes, 2):
+            pa_i = block_PA[i]
+            pa_j = block_PA[j]
+            shared = ((pa_i & pa_j) * block_Ls).sum()
+            diff = ((pa_i ^ pa_j) * block_Ls).sum()
+            res = {
+                "path_i": i,
+                "path_j": j,
+                "shared": shared,
+                "diff": diff,
+            }
+            res_df.append(res)
+            if i != j:
+                res = {
+                    "path_i": j,
+                    "path_j": i,
+                    "shared": shared,
+                    "diff": diff,
+                }
+                res_df.append(res)
+        res_df = pd.DataFrame(res_df)
+        res_df.set_index(["path_i", "path_j"], inplace=True)
+        return res_df
 
     def core_genome_alignment(self, guide_strain=None):
         """Returns the core genome aligment, in a biopython alignment object.
