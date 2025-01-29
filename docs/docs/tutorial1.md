@@ -116,14 +116,4 @@ print(block.alignment.generate_alignment())
 #  '16194835320646696346': 'ATATATGGTGCGTTAATTTTTAAACCCT...'}
 ```
 
-More details on alignments are provided in the [next tutorial](tutorial2.md).
-
-## general block statistics
-
-PyPangraph provides functions to easily compute statistics on the blocks.
-
-```python
-print(graph.blocks.stats())
-```
-
-## pangenome frequency
+More details on alignments are provided in [tutorial 3](tutorial3.md).

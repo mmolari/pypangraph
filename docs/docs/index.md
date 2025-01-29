@@ -1,8 +1,12 @@
 # PyPangraph
 
+!!! warning
+
+    This documentation is currently under construction. Please check back later for more content.
+
 PyPangraph is a Python library for loading, exploring and analyzing _pangenome graphs_ created by [PanGraph](https://github.com/neherlab/pangraph).
 
-More details on this data structure and the algorithms used to build it can be found in [PanGraph's documentation](https://github.com/neherlab/pangraph) and the [paper](index.md#pangraph-paper)
+More details on this data structure and the algorithms used to build it can be found in [PanGraph's documentation](https://github.com/neherlab/pangraph) and the [paper](index.md#pangraph-paper-citation)
 
 This documentation contains a series of tutorials to showcase the main features of PyPangraph:
 
@@ -27,6 +31,6 @@ Once genome have been partitioned into separate blocks, each genome can be repre
 
 More specifically, a path is encoded as a list of oriented block occurrences, i.e. **nodes**. This preserves information on the strandedness of each segment, and on the mutations in each genome, and makes our representation **lossless**: we can reconstruct the original genomes exactly from the pangraph.
 
-## PanGraph paper
+## PanGraph paper citation
 
 _PanGraph: scalable bacterial pan-genome graph construction_ Nicholas Noll, Marco Molari, Liam P. Shaw, Richard Neher _Microbial Genomics_ 9.6 (2023); doi: [https://doi.org/10.1099/mgen.0.001034](https://doi.org/10.1099/mgen.0.001034)
