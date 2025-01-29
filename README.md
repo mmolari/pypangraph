@@ -18,11 +18,13 @@ import pypangraph as pp
 graph = pp.Pangraph.from_json("path/to/graph.json")
 ```
 
+TODO: add more examples
+
 More examples can be found in the documentation.
 
 ## development
 
-Install the package in dev mode:
+Install the package in dev mode with:
 
 ```bash
 pip install -e .

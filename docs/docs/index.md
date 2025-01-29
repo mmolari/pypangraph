@@ -2,18 +2,26 @@
 
 !!! warning
 
-    This documentation is currently under construction. Please check back later for more content.
+    This documentation is currently under development. If you run into any issues, don't hesitate to open an issue on the [GitHub repository](TODO).
 
-PyPangraph is a Python library for loading, exploring and analyzing _pangenome graphs_ created by [PanGraph](https://github.com/neherlab/pangraph).
+PyPangraph is a Python library for loading, exploring and analyzing **pangenome graphs** created by [PanGraph](https://github.com/neherlab/pangraph).
 
-More details on this data structure and the algorithms used to build it can be found in [PanGraph's documentation](https://github.com/neherlab/pangraph) and the [paper](index.md#pangraph-paper-citation)
+More details on this data structure and the algorithms used to build it can be found in [PanGraph's documentation](TODO) and the [paper](index.md#pangraph-paper-citation)
+
+## Tutorials
 
 This documentation contains a series of tutorials to showcase the main features of PyPangraph:
 
-- [Loading and exploring a pangenome graph](tutorial1.md)
-- [Exploring block alignments](tutorial2.md)
+- [TODO](tutorial1.md)
+- [TODO](tutorial2.md)
 - [TODO](tutorial3.md)
 - [TODO](tutorial4.md)
+
+Other than PyPangraph, other python packages are used in the examples of the tutorial. They can be installed via [conda](https://docs.conda.io/en/latest/) with:
+
+```bash
+conda install -c conda-forge -c bioconda biopython pandas matplotlib seaborn scikit-learn
+```
 
 ## What is a Pangenome Graph?
 

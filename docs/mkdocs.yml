@@ -1,4 +1,4 @@
-site_name: Pypangraph Docs
+site_name: PyPangraph Docs
 nav:
   - Home: index.md
   - Installation: installation.md

@@ -132,12 +132,12 @@ class Alignment:
         """Returns the alignment in biopython MultipleSeqAlignment format"""
         records = []
         for node_id, seq in self.generate_alignment().items():
-            records.append(SeqRecord(Seq(seq), id=str(node_id)))
+            records.append(SeqRecord(Seq(seq), id=str(node_id), description=""))
         return MultipleSeqAlignment(records)
 
     def to_biopython_records(self):
         """Returns the sequences in biopython SeqRecord format"""
         records = []
         for node_id, seq in self.generate_sequences().items():
-            records.append(SeqRecord(Seq(seq), id=str(node_id)))
+            records.append(SeqRecord(Seq(seq), id=str(node_id), description=""))
         return records
