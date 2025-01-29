@@ -156,7 +156,8 @@ The optimal ordering of the genomes was determined with hierarchical clustering 
 
     # Perform hierarchical clustering
     linkage_matrix = sch.linkage(dist_df, method="ward")
-    order = sch.leaves_list(linkage_matrix)
+    ordered_indices = sch.leaves_list(linkage_matrix)
+    order = dist_df.index[ordered_indices]
     ```
 
 This matrix shows that there are plasmid clusters that have little within-cluster accessory genome, while plasmids from different clusters show several tens of kbps of accessory genome differences.

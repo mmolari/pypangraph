@@ -61,13 +61,93 @@ AlignIO.write(aln, "aln.fa", "fasta")
     mafft seqs.fa > aln.fa
     ```
 
+## core genome alignment
+
+Other than the alignment for single blocks, we can also extract the alignment of the full core genome, i.e. the concatenated alignment of all single-copy core blocks. Pangraph has a [dedicated export subcommand](TODO) for this:
+
+```bash
+pangraph export core-genome --guide-strain RCS34_p1 plasmids.json > core_aln.fa
+```
+
+Alternatively pypangraph provides the following method:
+
+```python
+core_aln = graph.core_genome_alignment(guide_strain="RCS34_p1")
+print(core_aln)
+# Alignment with 15 rows and 64989 columns
+# GTACCGGATTGGCACGAAAGTATTGCCCCTGTATTATCGCGGCC...GGG RCS33_p1
+# GTACCGGATTGGCACGAAAGTATTGCCCCTGTATTATCGCGGCC...GGG RCS64_p2
+# ...
+```
+
+The **guide strain** argument is the name of the path that is used to determine the order of the blocks in the alignment.
+
 
 ## sequence divergence
 
-- consensus frequency along the alignment
-- pairwise sequence divergence
+From the core-genome alignment we can quantify the sequence divergence in our dataset.
 
-## core genome alignment
+We can start by quantifying how the amount of divergence changes along the alignment. One simple way is to quantify the number of polymorphic sites along the alignment.
+
+```python
+import numpy as np
+# turn the alignment in a numpy matrix
+A = np.array(core_aln)
+
+# exclude sites with gaps
+non_gap = np.all(A != "-", axis=0)
+A = A[:, non_gap]
+
+# whether a site is polymorphic
+is_polymorphic = np.any(A != A[0, :], axis=0)
+```
+
+We can then plot the histogram of polymorphic sites along the alignment:
+
+```python
+import seaborn as sns
+bin_size = 500
+x = np.arange(len(is_polymorphic))
+weights = is_polymorphic.astype(int) / bin_size
+sns.histplot(x=x, weights=weights, binwidth=bin_size)
+```
+
+![alignment divergence](./assets/aln_divergence.png)
+
+Divergence varies along the alignment, with on average 5% of sites being polymorphic.
+
+For every pair of sequences, we can also quantify the pairwise sequence divergence:
+
+```python
+import pandas as pd
+import itertools as itt
+
+# calculate pairwise divergence matrix
+plasmids = [record.id for record in core_aln]
+div = {}
+for i, j in itt.combinations(range(len(plasmids)), 2):
+    seq_i, seq_j = A[i], A[j]
+    d = np.sum(seq_i != seq_j) / A.shape[1]
+    div[(plasmids[i], plasmids[j])] = d
+    div[(plasmids[j], plasmids[i])] = d
+div = pd.Series(div, name="divergence").unstack().fillna(0)
+print(div)
+#            RCS100_p1  RCS29_p1  RCS33_p1  ...
+# RCS100_p1   0.000000  0.021943  0.021943  ...
+# RCS29_p1    0.021943  0.000000  0.000000  ...
+# RCS33_p1    0.021943  0.000000  0.000000  ...
+# ...         ...       ...       ...       ...
+```
+
+The average pairwise divergence on the core-genome is 1.7%, but it is highly variable between pairs of plasmids. By visualizing the divergence matrix we can clearly see the presence of different clades, with very low within-clade divergence and high between-clade divergence:
+
+```python
+sns.clustermap(div)
+```
+
+![pairwise divergence](./assets/divergence_matrix.png)
 
 ## core genome tree
 
+!!! warning
+    TODO
