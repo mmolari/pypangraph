@@ -138,6 +138,6 @@ class Alignment:
     def to_biopython_records(self):
         """Returns the sequences in biopython SeqRecord format"""
         records = []
-        for node_id, seq in self.generate_alignment().items():
+        for node_id, seq in self.generate_sequences().items():
             records.append(SeqRecord(Seq(seq), id=str(node_id)))
         return records

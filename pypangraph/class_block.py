@@ -28,6 +28,9 @@ class Block:
     def __str__(self):
         return f"block {self.id}, consensus len = {len(self.alignment.consensus)} bp, n. nodes = {self.depth()}"
 
+    def __repr__(self):
+        return self.__str__()
+
     def depth(self):
         """How many occurrences of the block are present"""
         return self.alignment.depth()
@@ -44,6 +47,14 @@ class Block:
         """Returns a dictionary node_id -> aligned sequence for the block.
         The aligned sequence does not include insertions."""
         return self.alignment.generate_alignment()
+
+    def to_biopython_alignment(self):
+        """Returns the block alignment as a Biopython alignment object"""
+        return self.alignment.to_biopython_alignment()
+
+    def to_biopython_records(self):
+        """Returns the block sequence as a list of Biopython SeqRecord objects"""
+        return self.alignment.to_biopython_records()
 
 
 class BlockCollection(IndexedCollection):
