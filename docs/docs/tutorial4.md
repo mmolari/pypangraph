@@ -82,5 +82,77 @@ This shows immediately that the order of core blocks is perfectly conserved in o
 
 ## core genome synteny
 
+Plasmids are a relatively simple case to visualize and study, since they are small and have a low number of blocks. For full chromosomal genomes, visualizations can be too complex to be informative.
 
+For these cases, pypangraph provides a method to quickly survey all changes in core-genome synteny. This method relies on defining _minimal synteny units_ (MSUs), which are sets of core-blocks that always follow one another in the same order and orientation in all genomes, and if the accessory genome was to be removed they could all be merged together in a single block.
 
+![minimal synteny units](./assets/minimal_synteny_units.png)
+
+For this part of the tutorial we will analyze the `ecoli_graph.json.gz` graph, containing 10 _E. coli_ chromosomes. The minimal sinteny units for this graph can be extracted with the function:
+
+```python
+graph = pp.Pangraph.from_json("ecoli_graph.json.gz")
+
+# find MSUs
+threshold_len = 100  # minimal length of core blocks to consider
+MSU_mergers, MSU_paths, MSU_len = pp.minimal_synteny_units(graph, threshold_len)
+```
+
+This returns three objects:
+
+- `MSU_mergers`: a dictionary where keys are core block ids and the values are the ids of the MSU they belong to.
+- `MSU_paths`: a dictionary where keys are path ids and values are paths for each isolate, but whose nodes are MSUs instead of pangraph blocks.
+- `MSU_len`: a list of the lengths of the MSUs, i.e. the sum of length of the core blocks that compose them.
+
+We can draw a linear representation for paths in terms of the MSUs with the following code, in which each MSU is represented as a colored block of unit size. Arrows indicate inversions.
+
+```python
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+from collections import defaultdict
+
+# dictionary to assign colors to MSUs
+cmap = mpl.colormaps["rainbow"]
+color_generator = (cmap(i / len(MSU_len)) for i in range(len(MSU_len)))
+colors = defaultdict(lambda: next(color_generator))
+
+fig, ax = plt.subplots(figsize=(8, 5))
+
+for i, (iso, path) in enumerate(MSU_paths.items()):
+    for j, node in enumerate(path.nodes):
+        ax.barh(i, 1, left=j, color=colors[node.id])
+        if not node.strand:
+            ax.arrow(j + 1, i, -0.8, 0, head_width=0.2, head_length=0.2)
+ax.set_yticks(range(len(MSU_paths)))
+ax.set_yticklabels(list(MSU_paths.keys()))
+plt.show()
+```
+
+![MSUs](./assets/MSUs.png)
+
+We observe that, while most genomes have a conserved order of MSUs, three genomes present variations. These consist of inversions or transloacations of a set of core blocks.
+
+Similarly to what done for plasmids, we can visualize these units on Bandage. We can export the graph in GFA format, only keeping core blocks, with:
+
+```bash
+pangraph export gfa \
+    --no-duplicated \
+    --minimum-depth 10 \
+    ecoli_graph.json.gz > ecoli.gfa
+```
+
+And then we can export the dictionary of core-block colors with:
+
+```python
+block_colors = {}
+for block_id in graph.blocks.keys():
+    if block_id in MSU_mergers:
+        block_colors[block_id] = mpl.colors.to_hex(colors[MSU_mergers[block_id]])
+    else:
+        block_colors[block_id] = mpl.colors.to_hex("lightgray")
+pd.Series(block_colors, name="Colour").to_csv("block_colors.csv")
+```
+
+After loading the graph in Bandage and coloring the blocks we obtain the following picture:
+
+![ecoli core bandage](./assets/ecoli_bandage.png)
