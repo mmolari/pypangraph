@@ -44,7 +44,7 @@ class Pangraph:
         """Creates a Pangraph object by loading it from the .json file.
 
         Args:
-            from_json (str): .json file to be loaded.
+            from_json (str): .json file to be loaded, optionally gzipped.
 
         Returns:
             Pangraph: the Pangraph object containing the results of the pipeline.
