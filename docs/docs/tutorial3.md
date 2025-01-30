@@ -1,4 +1,4 @@
-# exploring block alignments
+# Exploring block alignments
 
 In this next tutorial section we explore block alignments in more detail.
 

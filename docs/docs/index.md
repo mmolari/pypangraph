@@ -12,10 +12,10 @@ More details on this data structure and the algorithms used to build it can be f
 
 This documentation contains a series of tutorials to showcase the main features of PyPangraph:
 
-- [TODO](tutorial1.md)
-- [TODO](tutorial2.md)
-- [TODO](tutorial3.md)
-- [TODO](tutorial4.md)
+- [Load and explore a graph](tutorial1.md)
+- [A look at the pangenome](tutorial2.md)
+- [Exploring block alignments](tutorial3.md)
+- [Paths and core-genome synteny](tutorial4.md)
 
 Other than PyPangraph, other python packages are used in the examples of the tutorial. They can be installed via [conda](https://docs.conda.io/en/latest/) with:
 

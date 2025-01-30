@@ -1,5 +1,5 @@
 
-# a look at the pangenome
+# A look at the pangenome
 
 In this next section of the tutorial we use some of the features of PyPangraph to explore the blocks that make up the pangenome graph, and extract information on the pangenome of our dataset.
 

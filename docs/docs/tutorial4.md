@@ -1,4 +1,4 @@
-# paths and core genome synteny
+# Paths and core genome synteny
 
 In this tutorial we will learn how to visualize paths in a pangraph and to survey changes in core-genome synteny.
 
@@ -101,8 +101,8 @@ MSU_mergers, MSU_paths, MSU_len = pp.minimal_synteny_units(graph, threshold_len)
 This returns three objects:
 
 - `MSU_mergers`: a dictionary where keys are core block ids and the values are the ids of the MSU they belong to.
-- `MSU_paths`: a dictionary where keys are path ids and values are paths for each isolate, but whose nodes are MSUs instead of pangraph blocks.
-- `MSU_len`: a list of the lengths of the MSUs, i.e. the sum of length of the core blocks that compose them.
+- `MSU_paths`: a dictionary where keys are path ids and values are paths composed of MSUs instead of blocks.
+- `MSU_len`: a list of the lengths of the MSUs in basepairs, i.e. the sum of consensus length of the core blocks that compose them.
 
 We can draw a linear representation for paths in terms of the MSUs with the following code, in which each MSU is represented as a colored block of unit size. Arrows indicate inversions.
 
