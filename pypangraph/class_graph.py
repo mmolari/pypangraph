@@ -99,6 +99,18 @@ class Pangraph:
         df["len"] = [len(self.blocks[bid]) for bid in df.index]
         return df
 
+    def to_path_dictionary(self):
+        """Returns a dictionary whose keys are strain names, and values are
+        list of block ids and strandedness."""
+        path_dict = {}
+        for name, path in self.paths.items():
+            blocks = []
+            for node_id in path.nodes:
+                block_id, strand = self.nodes.node_to_block(node_id)
+                blocks.append((block_id, strand))
+            path_dict[name] = blocks
+        return path_dict
+
     def pairwise_accessory_genome_comparison(self):
         """Returns a dataframe whose index are pairs of strains, and values are
         - amount of shared pangenome in basepairs
