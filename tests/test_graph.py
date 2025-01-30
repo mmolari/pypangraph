@@ -14,6 +14,12 @@ def graph():
     return pan
 
 
+def test_load_graph_gz():
+    fname = "tests/data/plasmids.json.gz"
+    pan = pp.Pangraph.from_json(fname)
+    assert len(pan.strains()) == 15
+
+
 def test_paths(graph):
     path = graph.paths["RCS48_p1"]
     assert len(path) == 60

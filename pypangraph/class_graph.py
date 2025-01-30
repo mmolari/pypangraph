@@ -3,6 +3,7 @@
 import json
 import jsonschema
 import itertools
+import gzip
 import pandas as pd
 from Bio import SeqRecord, Seq, AlignIO
 
@@ -49,12 +50,19 @@ class Pangraph:
             Pangraph: the Pangraph object containing the results of the pipeline.
         """
 
-        isjson = str(filename).endswith(".json")
-        if not isjson:
-            raise Exception(f"the input file {filename} should be in .json format")
+        is_json = str(filename).endswith(".json")
+        is_gzjson = str(filename).endswith(".json.gz")
+        if not (is_json or is_gzjson):
+            raise Exception(
+                f"the input file {filename} should be in .json or .json.gz format"
+            )
 
-        with open(filename, "r") as f:
-            pan_json = json.load(f)
+        if is_gzjson:
+            with gzip.open(filename, "rt") as f:
+                pan_json = json.load(f)
+        else:
+            with open(filename, "r") as f:
+                pan_json = json.load(f)
 
         try:
             graph = {"pangraph": pan_json}
