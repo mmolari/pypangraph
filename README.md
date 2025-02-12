@@ -1,9 +1,8 @@
-[![PyPI version](https://badge.fury.io/py/pypangraph.svg)](https://badge.fury.io/py/pypangraph)
+# PyPangraph: python utilities to interact with PanGraph's pangenome graphs
 
 > [!WARNING]
 > This repository contains code for the legacy version `v0.1` of pypangraph. The [current version](https://github.com/neherlab/pangraph/tree/master/packages/pypangraph) is hosted in the [pangraph](https://github.com/neherlab/pangraph) repository, together with the [documentation](https://docs.pangraph.org/category/pypangraph).
-> 
-# pypangraph: python utilities to interact with PanGraph's pangenome graphs
+
 
 This repository contains a collection of utilities to interact with pangrenome graphs produced by [PanGraph](https://github.com/neherlab/pangraph).
 
